@@ -1,0 +1,86 @@
+
+<div class="flex flex-col w-10/12  my-8">
+
+<ng-container [ngSwitch]="stepperOrientation | async">
+  <div class="text-center text-orange-600  text-xl p-2 capitalize h-5  my-7" *ngSwitchCase="'horizontal'">
+
+
+    <span> {{ hiddenWord }}<span *ngIf="showCursor">{{ cursor }}</span>
+
+    </span>
+
+  </div>
+
+
+  <div class="text-center text-orange-600 text-xl p-2 capitalize h-5  my-12" *ngSwitchCase="'vertical'">
+    <span> {{ hiddenWord }}<span *ngIf="showCursor">{{ cursor }}</span>
+
+    </span>
+
+
+  </div>
+</ng-container>
+
+
+
+<div class="w-full" style="background-image: url('./assets/images/test/test.jpg'); background-position:center; background-size:cover;">
+
+
+
+
+  <mat-stepper class="min-[800px]:h-[386px] bg-transparent" [orientation]="(stepperOrientation | async)!">
+
+
+
+
+    <mat-step [stepControl]="firstFormGroup" label="Fill out your name" errorMessage="Name is required.">
+      <form [formGroup]="firstFormGroup"  style="width: 45%;">
+        <mat-form-field appearance="fill" style="width: 100%;">
+
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" style="width: 100%;" formControlName="name"
+            required>
+        </mat-form-field>
+        <div>
+          <button mat-stroked-button	 matStepperNext color="warn">{{'test.Next'|translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Enter your question" errorMessage="Question is required.">
+
+      <form [formGroup]="secondFormGroup"  style="width: 45%;">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Question</mat-label>
+          <input matInput formControlName="firstCtrl" style="width: 100%;" placeholder=" Ex. cost of 2 cameras Hikvinsion ?" required class="w-full">
+        </mat-form-field>
+        <div>
+          <button mat-stroked-button	 matStepperPrevious color="primary">{{'test.Back'|translate}}</button>
+          <button mat-stroked-button	 matStepperNext color="warn">{{'test.Next'|translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="Fill out your phone number" errorMessage="Number is required.">
+      <form [formGroup]="thirdFormGroup" style="width: 45%;">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="phone" placeholder="Ex. 12345678" required class="w-full" style="width: 100%;">
+        </mat-form-field>
+        <div>
+          <button  mat-stroked-button	  matStepperPrevious color="primary" class="ml-5">{{'test.Back'|translate}}</button>
+          <button mat-stroked-button	 matStepperNext (click)="submitRequest()" color="warn" class="m-2">Send Request</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel color="warn">Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button  mat-stroked-button	  matStepperPrevious color="primary">{{'test.Back'|translate}}</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+
+</div>
+
+</div>

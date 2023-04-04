@@ -1,0 +1,64 @@
+
+
+
+<button id="call-btn" class="w-[135px]  animate-pulse fixed bottom-5 flex items-center justify-center left-3   z-10 text-center  bg-white  hover:text-white hover:bg-orange-500
+  text-black  font-bold py-2 px-4 rounded-md shadow "
+ (click)="toggleRequestCall()" >
+
+
+<ng-container class="text-center  p-0 m-0" *ngIf="showRequestCall; else elseTemplate">
+  <mat-icon class="p-0 m-0">cancel</mat-icon>
+
+</ng-container>
+<ng-template #elseTemplate>
+ {{'call.Request a Call' |translate}}
+</ng-template>
+
+</button>
+
+<ng-container *ngIf="showRequestCall">
+      <form id="call-options" [formGroup]="formCall"
+
+
+      class="w-[161px] h-auto  max-[370px]:w-[161px] fixed bottom-16  left-1 flex  z-10  flex-col justify-center items-center bg-white rounded-lg shadow-md" [ngClass]="{'hidden': !showRequestCall}">
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+
+          <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher" placeholder="Ex. Vadim">
+
+
+
+          <mat-error *ngIf="formCall.get('name')?.hasError('required') && !formCall.get('name')?.hasError('required')">
+            Please enter a valid name
+          </mat-error>
+          <mat-error *ngIf="formCall.get('name')?.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+
+        </mat-form-field>
+
+
+
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone Number</mat-label>
+
+          <input type="text" matInput formControlName="phone" [errorStateMatcher]="matcher" placeholder="Ex. 06565460456">
+
+
+
+          <mat-error *ngIf="formCall.get('phone')?.hasError('pattern') && !formCall.get('phone')?.hasError('required')">
+            Please enter a valid phone number
+          </mat-error>
+          <mat-error *ngIf="formCall.get('phone')?.hasError('required')">
+            Phone is <strong>required</strong>
+          </mat-error>
+
+        </mat-form-field>
+      <button mat-raised-button color="warn" [disabled]="!formCall.valid" (click)="onRequestCall()" class=" my-2"> {{'call.Request a Call' |translate}}</button>
+
+
+      </form>
+
+</ng-container>
+

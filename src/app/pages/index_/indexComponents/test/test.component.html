@@ -1,0 +1,134 @@
+<div *ngIf="!testShow; else test" class="h-[410px] w-full  max-[608px]:w-[400px] max-[491px]:w-[300px]">
+  <div class="flex justify-center items-center flex-col w-5/12 m-14">
+    <p class="max-[627px]:text-2xl text-3xl font-serif font-semibold text-center text-orange-600">
+      {{'test.Know the cost of a video surveillance system for YOUR Property.' |translate}}
+    </p>
+
+    <button (click)="testInit()" mat-raised-button color="warn" class="mt-14 animate-bounce duration-300"
+      style="padding: 30px">
+      {{'test.Know the cost'|translate}}
+    </button>
+  </div>
+</div>
+
+<ng-template #test>
+<mat-stepper class="min-[800px]:h-[386px] bg-transparent" [orientation]="(stepperOrientation | async)!">
+
+
+
+  <mat-step [stepControl]="firstFormGroup" label="{{this.questionsArray[0].question}}" errorMessage="Name is required.">
+    <form [formGroup]="firstFormGroup" >
+
+        <mat-label>{{this.questionsArray[0].question}}</mat-label>
+
+
+<mat-radio-group  formControlName="firstCtrl" class="flex flex-col">
+  <mat-radio-button *ngFor="let obj of this.questionsArray[0].answers" [value]="obj.answer" required>
+  {{obj.answer}}
+
+  </mat-radio-button>
+</mat-radio-group>
+
+
+      <div>
+        <button  mat-raised-button matStepperNext  class="m-2" color="warn">{{'test.Next'|translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="secondFormGroup" label="{{this.questionsArray[1].question}}" errorMessage="is required.">
+
+    <form [formGroup]="secondFormGroup">
+
+
+          <mat-label>{{this.questionsArray[1].question}}</mat-label>
+
+
+          <mat-radio-group  formControlName="secondCtrl" class="flex flex-col">
+            <mat-radio-button *ngFor="let obj of this.questionsArray[1].answers" [value]="obj.answer" required>
+              {{obj.answer}}
+
+            </mat-radio-button>
+          </mat-radio-group>
+
+      <div>
+        <button  mat-raised-button matStepperPrevious color="primary" class="m-2">{{'test.Back'|translate}}</button>
+        <button  mat-raised-button matStepperNext color="warn" class="m-2">{{'test.Next'|translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup" label="{{this.questionsArray[2].question}}" errorMessage=" is required.">
+    <form [formGroup]="thirdFormGroup">
+
+  <mat-label>{{this.questionsArray[2].question}}</mat-label>
+
+
+  <mat-radio-group matInput formControlName="thirdCtrl" class="flex flex-col">
+    <mat-radio-button *ngFor="let obj of this.questionsArray[2].answers" [value]="obj.answer" required>
+      {{obj.answer}}
+
+    </mat-radio-button>
+  </mat-radio-group>
+
+
+      <div>
+        <button  mat-raised-button matStepperPrevious color="primary" class="m-2">{{'test.Back'|translate}}</button>
+        <button  mat-raised-button matStepperNext color="warn" class="m-2">{{'test.Next'|translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="personalData" label="Enter your data" errorMessage="Number is required.">
+    <form [formGroup]="personalData" class="flex flex-col">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder=" Ex. Vadim"  required>
+
+
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" placeholder=" Ex. Chișinău " required>
+
+
+    </mat-form-field>
+
+        <mat-form-field appearance="fill">
+
+
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="phone" placeholder=" Ex. 12345678"  required>
+
+        </mat-form-field>
+
+
+
+      <div>
+        <button  mat-raised-button matStepperPrevious color="primary" class="m-2">{{'test.Back'|translate}}</button>
+        <button  mat-raised-button matStepperNext color="warn" class="m-2" (click)="finishTest()">{{ 'test.Know the Cost'| translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step>
+    <ng-template matStepLabel color="warn">Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button  mat-raised-button matStepperPrevious color="primary">{{'test.Back'|translate}}</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+
+
+
+
+
+
+</ng-template>

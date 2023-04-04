@@ -1,0 +1,80 @@
+
+
+<div class="w-8/12 flex flex-col">
+<label  class="text-white w-full text-2xl mb-2">Keep in touch !</label>
+
+
+
+
+<form [formGroup]="contactForm"  class="example-form    " (submit)="submitRequest()">
+
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+
+    <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher" placeholder="Ex. Vadim">
+
+    <mat-hint>Errors appear instantly!</mat-hint>
+
+
+    <mat-error *ngIf="contactForm.get('name')?.hasError('required') && !contactForm.get('name')?.hasError('required')">
+      Please enter a valid name
+    </mat-error>
+    <mat-error *ngIf="contactForm.get('name')?.hasError('required')">
+      Name is <strong>required</strong>
+    </mat-error>
+
+  </mat-form-field>
+
+
+
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Phone Number</mat-label>
+
+    <input type="text" matInput formControlName="phone" [errorStateMatcher]="matcher"
+      placeholder="Ex. 06565460456">
+
+<mat-hint>Errors appear instantly!</mat-hint>
+
+
+    <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern') && !contactForm.get('phone')?.hasError('required')">
+      Please enter a valid phone number
+    </mat-error>
+    <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
+      Phone is <strong>required</strong>
+    </mat-error>
+
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+
+    <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
+
+    <mat-hint>Errors appear instantly!</mat-hint>
+
+
+    <mat-error *ngIf="contactForm.get('email')?.hasError('email') && !contactForm.get('email')?.hasError('required')">
+        Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+
+  </mat-form-field>
+
+
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput placeholder="Ex. How much cost cameras..."  formControlName="message"></textarea>
+  </mat-form-field>
+
+
+      <button type="submit" style="width: 100%;" [disabled]="!contactForm.get('phone')?.valid"  color="warn" mat-flat-button>Send</button>
+
+
+</form>
+</div>
